@@ -11,18 +11,18 @@ import (
 	"helloworld/rpc/internal/svc"
 )
 
-type HelloworldServer struct {
+type HelloWorldServer struct {
 	svcCtx *svc.ServiceContext
-	helloworld.UnimplementedHelloworldServer
+	helloworld.UnimplementedHelloWorldServer
 }
 
-func NewHelloworldServer(svcCtx *svc.ServiceContext) *HelloworldServer {
-	return &HelloworldServer{
+func NewHelloWorldServer(svcCtx *svc.ServiceContext) *HelloWorldServer {
+	return &HelloWorldServer{
 		svcCtx: svcCtx,
 	}
 }
 
-func (s *HelloworldServer) Call(ctx context.Context, in *helloworld.Request) (*helloworld.Response, error) {
+func (s *HelloWorldServer) Call(ctx context.Context, in *helloworld.Request) (*helloworld.Response, error) {
 	l := logic.NewCallLogic(ctx, s.svcCtx)
 	return l.Call(in)
 }

@@ -6,4 +6,9 @@ import (
 
 type Config struct {
 	rest.RestConf
+	RpcConfig
+}
+
+type RpcConfig struct {
+	HellWorldEndpoint string `json:"HellWorldEndpoint"`
 }

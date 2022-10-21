@@ -2,9 +2,9 @@ package logic
 
 import (
 	"context"
-
 	"helloworld/api/internal/svc"
 	"helloworld/api/internal/types"
+	"helloworld/rpc/helloworld"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,7 +24,9 @@ func NewGetHelloWorldLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Get
 }
 
 func (l *GetHelloWorldLogic) GetHelloWorld(req *types.Request) (resp *types.Response, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+	result, err := l.svcCtx.HelloWorldClient.Call(l.ctx, &helloworld.Request{})
+	if err != nil {
+		return nil, err
+	}
+	return &types.Response{Name: result.Name}, nil
 }

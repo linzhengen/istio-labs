@@ -24,7 +24,5 @@ func NewCallLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CallLogic {
 }
 
 func (l *CallLogic) Call(in *helloworld.Request) (*helloworld.Response, error) {
-	// todo: add your logic here and delete this line
-
-	return &helloworld.Response{}, nil
+	return &helloworld.Response{Name: "foo"}, nil
 }

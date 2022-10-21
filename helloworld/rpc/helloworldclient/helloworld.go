@@ -16,22 +16,22 @@ type (
 	Request  = helloworld.Request
 	Response = helloworld.Response
 
-	Helloworld interface {
+	HelloWorld interface {
 		Call(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
 	}
 
-	defaultHelloworld struct {
+	defaultHelloWorld struct {
 		cli zrpc.Client
 	}
 )
 
-func NewHelloworld(cli zrpc.Client) Helloworld {
-	return &defaultHelloworld{
+func NewHelloWorld(cli zrpc.Client) HelloWorld {
+	return &defaultHelloWorld{
 		cli: cli,
 	}
 }
 
-func (m *defaultHelloworld) Call(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
-	client := helloworld.NewHelloworldClient(m.cli.Conn())
+func (m *defaultHelloWorld) Call(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
+	client := helloworld.NewHelloWorldClient(m.cli.Conn())
 	return client.Call(ctx, in, opts...)
 }
