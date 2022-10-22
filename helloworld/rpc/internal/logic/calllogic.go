@@ -2,6 +2,8 @@ package logic
 
 import (
 	"context"
+	"math/rand"
+	"time"
 
 	"helloworld/rpc/helloworld"
 	"helloworld/rpc/internal/svc"
@@ -24,5 +26,10 @@ func NewCallLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CallLogic {
 }
 
 func (l *CallLogic) Call(in *helloworld.Request) (*helloworld.Response, error) {
+	rand.Seed(time.Now().UnixNano())
+	min := 100
+	max := 500
+	s := rand.Intn(max-min+1) + min
+	time.Sleep(time.Duration(s) * time.Millisecond)
 	return &helloworld.Response{Name: "foo"}, nil
 }
