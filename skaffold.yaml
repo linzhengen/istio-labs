@@ -17,7 +17,7 @@ build:
         dockerfile: rpc/Dockerfile
 
 deploy:
-  kustomize:
-    paths:
-    - helloworld/api/k8s
-    - helloworld/rpc/k8s
+  kubectl:
+    manifests:
+    - helloworld/api/k8s/*
+    - helloworld/rpc/k8s/*
