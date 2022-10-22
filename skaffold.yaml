@@ -1,5 +1,5 @@
 # doc: https://skaffold.dev/docs/references/yaml
-apiVersion: skaffold/v2beta19
+apiVersion: skaffold/v2beta29
 kind: Config
 
 
@@ -17,7 +17,7 @@ build:
         dockerfile: rpc/Dockerfile
 
 deploy:
-  kubectl:
-    manifests:
-      - helloworld/api/k8s/*.yaml
-      - helloworld/rpc/k8s/*.yaml
+  kustomize:
+    paths:
+    - helloworld/api/k8s
+    - helloworld/rpc/k8s
