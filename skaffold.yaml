@@ -1,0 +1,23 @@
+# doc: https://skaffold.dev/docs/references/yaml
+apiVersion: skaffold/v2beta19
+kind: Config
+
+
+build:
+  tagPolicy:
+    gitCommit: {}
+  artifacts:
+    - image: api
+      context: ./helloworld
+      docker:
+        dockerfile: api/Dockerfile
+    - image: rpc
+      context: ./helloworld
+      docker:
+        dockerfile: rpc/Dockerfile
+
+deploy:
+  kubectl:
+    manifests:
+      - helloworld/api/k8s/*.yaml
+      - helloworld/rpc/k8s/*.yaml

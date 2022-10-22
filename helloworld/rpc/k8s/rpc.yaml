@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: rpc
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rpc
+  namespace: rpc
+  labels:
+    app: rpc
+spec:
+  replicas: 2
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: rpc
+  template:
+    metadata:
+      labels:
+        app: rpc
+    spec:
+      containers:
+      - name: rpc
+        image: rpc
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        resources:
+          requests:
+            cpu: 500m
+            memory: 512Mi
+          limits:
+            cpu: 1000m
+            memory: 1024Mi
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rpc-svc
+  namespace: rpc
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    app: rpc
+

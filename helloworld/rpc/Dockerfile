@@ -3,12 +3,14 @@ FROM golang:1.19 as build
 WORKDIR /src
 COPY . .
 RUN sh -c "[ -f go.mod ]" || exit
-COPY helloworld/rpc /src
-RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o /app /src
+COPY . /src
+RUN ls -al
+RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o /app /src/rpc
 
 FROM gcr.io/distroless/base:debug-nonroot
+WORKDIR /
 
 COPY --from=build /app /app
-COPY --from=build /src/etc /app/etc
+COPY --from=build /src/rpc/etc /etc
 
 ENTRYPOINT ["/app"]
