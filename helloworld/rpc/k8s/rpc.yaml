@@ -24,20 +24,18 @@ spec:
         app: rpc
     spec:
       containers:
-      - name: rpc
-        image: rpc
-        ports:
-        - containerPort: 8080
-        resources:
-          requests:
-            cpu: 500m
-            memory: 512Mi
-          limits:
-            cpu: 1000m
-            memory: 1024Mi
-
+        - name: rpc
+          image: rpc
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 1000m
+              memory: 1024Mi
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -45,8 +43,30 @@ metadata:
   namespace: rpc
 spec:
   ports:
-  - port: 8080
-    targetPort: 8080
+    - port: 8080
+      targetPort: 8080
   selector:
     app: rpc
 
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: rpc-virtual-svc
+  namespace: rpc
+spec:
+  hosts:
+    - rpc-svc.rpc.svc.cluster.local
+  http:
+    - route:
+        - destination:
+            host: rpc-svc.rpc.svc.cluster.local
+            port:
+              number: 8080
+      match:
+        - port: 8080
+      retries:
+        attempts: 3
+        perTryTimeout: 2s
+        # ref: https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-grpc-on
+        retryOn: unavailable,deadline-exceeded,reset,connect-failure
