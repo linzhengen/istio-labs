@@ -22,3 +22,10 @@ deploy:
     - istio/mesh_default.yaml
     - helloworld/api/k8s/*
     - helloworld/rpc/k8s/*
+
+portForward:
+  - resourceType: service
+    resourceName: locust
+    namespace: locust
+    port: 8089
+    localPort: 8089

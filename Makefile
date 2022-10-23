@@ -2,13 +2,14 @@ init:
 	minikube addons enable metrics-server
 	brew install skaffold
 	brew install vegeta
+	cd istio && make deploy-base
+	cd istio && make deploy-istiod
+	cd locust && make deploy
 
 dev:
 	skaffold dev -v debug
 
-build:
-	skaffold build --file-output output.json
-
 load-test:
-	echo 'GET http://localhost:8888/sayHello' | vegeta attack -rate=30 -duration=120s | vegeta report
+	kubectl --namespace locust port-forward service/locust 8089:8089
+
 

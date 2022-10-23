@@ -7,6 +7,7 @@ deploy:
 	--kube-context minikube \
 	--create-namespace \
 	--namespace locust \
+	--set loadtest.locust_host= \
 	--set loadtest.name=hello-world-loadtest \
     --set loadtest.locust_locustfile_configmap=hello-world-loadtest
 	kubectl -n locust rollout restart deployment locust-worker locust-master
