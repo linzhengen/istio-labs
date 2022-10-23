@@ -5,5 +5,5 @@ type Request struct {
 }
 
 type Response struct {
-	Name string `json:"name"`
+	Message string `json:"name"`
 }

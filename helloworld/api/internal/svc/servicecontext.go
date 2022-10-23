@@ -3,19 +3,19 @@ package svc
 import (
 	"github.com/zeromicro/go-zero/zrpc"
 	"helloworld/api/internal/config"
-	"helloworld/rpc/helloworldclient"
+	"helloworld/rpc/greeter"
 	"time"
 )
 
 type ServiceContext struct {
-	Config           config.Config
-	HelloWorldClient helloworldclient.HelloWorld
+	Config                  config.Config
+	HelloWorldGreeterClient greeter.Greeter
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config: c,
-		HelloWorldClient: helloworldclient.NewHelloWorld(
+		HelloWorldGreeterClient: greeter.NewGreeter(
 			zrpc.MustNewClient(zrpc.NewDirectClientConf([]string{c.HellWorldEndpoint}, "", ""), zrpc.WithTimeout(10*time.Second)),
 		),
 	}

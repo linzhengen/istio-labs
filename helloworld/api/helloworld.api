@@ -4,10 +4,10 @@ type request {
 }
 
 type response {
-	Name string `json:"name"`
+	Message string `json:"name"`
 }
 
 service helloworld-api {
-	@handler GetHelloWorld
-	get /helloWorld(request) returns(response)
+	@handler GetSayHello
+	get /sayHello(request) returns(response)
 }

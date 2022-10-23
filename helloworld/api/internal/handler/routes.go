@@ -14,8 +14,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/helloWorld",
-				Handler: GetHelloWorldHandler(serverCtx),
+				Path:    "/sayHello",
+				Handler: GetSayHelloHandler(serverCtx),
 			},
 		},
 	)

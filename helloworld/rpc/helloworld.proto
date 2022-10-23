@@ -4,13 +4,14 @@ package helloworld;
 
 option go_package = "./helloworld";
 
-message request{
+service Greeter {
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
 }
 
-message response{
+message HelloRequest {
   string name = 1;
 }
 
-service  helloWorld{
-  rpc Call(request) returns(response);
+message HelloReply {
+  string message = 1;
 }
