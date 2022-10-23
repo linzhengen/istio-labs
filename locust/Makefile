@@ -9,3 +9,4 @@ deploy:
 	--namespace locust \
 	--set loadtest.name=hello-world-loadtest \
     --set loadtest.locust_locustfile_configmap=hello-world-loadtest
+	kubectl -n locust rollout restart deployment locust-worker locust-master
