@@ -12,6 +12,10 @@ metadata:
   namespace: rpc
   labels:
     app: rpc
+  annotations:
+    proxy.istio.io/config: |
+      proxyMetadata:
+        EXIT_ON_ZERO_ACTIVE_CONNECTIONS: 'true'
 spec:
   replicas: 2
   revisionHistoryLimit: 5

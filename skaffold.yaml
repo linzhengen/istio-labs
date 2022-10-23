@@ -19,5 +19,6 @@ build:
 deploy:
   kubectl:
     manifests:
+    - istio/mesh_default.yaml
     - helloworld/api/k8s/*
     - helloworld/rpc/k8s/*
