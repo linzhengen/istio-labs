@@ -67,6 +67,7 @@ spec:
             host: rpc-svc.rpc.svc.cluster.local
             port:
               number: 8080
+      timeout: 8s
       match:
         - port: 8080
       retries:
