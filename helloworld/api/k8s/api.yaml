@@ -29,7 +29,7 @@ spec:
         ports:
         - containerPort: 8888
         env:
-          - name: HELL_WORLD_ENDPOINT
+          - name: RPC_ENDPOINT
             value: rpc-svc.rpc.svc.cluster.local:8080
         resources:
           requests:

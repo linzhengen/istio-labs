@@ -8,4 +8,4 @@ class WebsiteUser(HttpUser):
 
     @task
     def get_hello_world(self):
-        self.client.get('/sayHello')
+        self.client.get('/api/v1/sayHello')

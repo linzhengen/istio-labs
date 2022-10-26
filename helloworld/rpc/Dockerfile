@@ -11,6 +11,5 @@ FROM gcr.io/distroless/base:debug-nonroot
 WORKDIR /
 
 COPY --from=build /app /app
-COPY --from=build /src/rpc/etc /etc
 
 ENTRYPOINT ["/app"]
