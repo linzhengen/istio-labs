@@ -22,6 +22,10 @@ spec:
     metadata:
       labels:
         app: api
+      annotations:
+        proxy.istio.io/config: |
+          proxyMetadata:
+            EXIT_ON_ZERO_ACTIVE_CONNECTIONS: 'true'
     spec:
       containers:
       - name: api
@@ -52,4 +56,26 @@ spec:
     targetPort: 8888
   selector:
     app: api
-
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: rpc-virtual-svc
+  namespace: api
+spec:
+  hosts:
+    - rpc-svc.rpc.svc.cluster.local
+  http:
+    - route:
+        - destination:
+            host: rpc-svc.rpc.svc.cluster.local
+            port:
+              number: 8080
+      timeout: 10s
+      match:
+        - port: 8080
+      retries:
+        attempts: 3
+        perTryTimeout: 8s
+        # ref: https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-grpc-on
+        retryOn: unavailable,deadline-exceeded,reset,connect-failure
