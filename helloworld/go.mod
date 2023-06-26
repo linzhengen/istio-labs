@@ -7,7 +7,7 @@ require (
 	github.com/zeromicro/go-zero v1.5.2
 	google.golang.org/genproto v0.0.0-20230524185152-1884fd1fac28
 	google.golang.org/grpc v1.55.0
-	google.golang.org/protobuf v1.30.0
+	google.golang.org/protobuf v1.31.0
 )
 
 require (
