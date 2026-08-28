@@ -1,8 +1,6 @@
 module helloworld
 
-go 1.21
-
-toolchain go1.21.6
+go 1.23
 
 require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.19.1
@@ -10,7 +8,7 @@ require (
 	google.golang.org/genproto v0.0.0-20240205150955-31a09d347014
 	google.golang.org/genproto/googleapis/api v0.0.0-20240205150955-31a09d347014
 	google.golang.org/grpc v1.61.0
-	google.golang.org/protobuf v1.35.2
+	google.golang.org/protobuf v1.36.12
 )
 
 require (
@@ -29,7 +27,7 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
 	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
-	github.com/google/go-cmp v0.6.0 // indirect
+	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/googleapis/gnostic v0.5.5 // indirect
